@@ -1,0 +1,38 @@
+{
+    "workbench.colorTheme": "Cobalt2",
+    "editor.minimap.enabled": false,
+    "prettier.eslintIntegration": true,
+    "window.closeWhenEmpty": false,
+    "window.title": "${activeEditorMedium}${separator}${rootName}",
+    "editor.multiCursorModifier": "ctrlCmd",
+  
+    // "editor.fontFamily": "Dank Mono",
+    // Enables font ligatures
+    // "editor.fontLigatures": true,
+    // Adds icons to files
+    // "workbench.iconTheme": "file-icons",
+  
+    // get rid of error
+    "http.proxy": "",
+    "http.proxyAuthorization": null,
+    "http.proxyStrictSSL": false,
+    "terminal.integrated.fontFamily": "monospace",
+    "prettier.singleQuote": true,
+    "prettier.printWidth": 120,
+  
+    "workbench.colorCustomizations": {
+      "[Cobalt2]": {
+        "gitDecoration.ignoredResourceForeground": "#808080",
+      }
+    },
+    "breadcrumbs.enabled": false,
+  
+     // Delay before live reloading. Value in milliseconds. Default is 100
+    "liveServer.settings.wait": 500,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+  
+    // "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+  }
+  
