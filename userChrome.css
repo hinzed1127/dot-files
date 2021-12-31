@@ -1,0 +1,140 @@
+/* 
+  THINGS TO DO/PLACES TO LOOK TO UPDATE THIS:
+    - Activate/use the FF Browser Toolbox (https://developer.mozilla.org/en-US/docs/Tools/Browser_Toolbox)
+    - Check out github repos:
+        - https://github.com/MrOtherGuy/firefox-csshacks
+        - https://github.com/Timvde/UserChrome-Tweaks
+        - https://github.com/Aris-t2/CustomCSSforFx
+ */
+
+/*
+ * Auto-hide the URL-bar show on hover or focus
+ * as seen in https://www.reddit.com/r/FirefoxCSS/comments/boetx7/annoying_page_jump_with_address_bar_autohide/engne27/
+ * by https://www.reddit.com/user/SkyrimForTheDragons/
+ *
+ * slightly modified for more responsiveness
+ * 
+ * Note that this version DOES NOT hide the bookmarks toolbar!
+ */
+
+ /* NOTE I modified this to ONLY happen in fullscreen mode (a la chrome presentation mode) */
+
+#nav-bar[inFullscreen]:not([customizing="true"]) {
+	min-height: 1px !important;
+	max-height: 0px !important;
+	margin-top: 1px !important;
+	margin-bottom: -1px !important;
+	transition: all 50ms linear 0s !important;
+	z-index: -5 !important;
+}
+
+#navigator-toolbox[inFullscreen]:hover :-moz-any(#nav-bar),
+#navigator-toolbox[inFullscreen]:focus-within :-moz-any(#nav-bar) {
+	min-height: 40px !important;
+	max-height: 40px !important;
+	margin-top: 1px !important;
+	margin-bottom: -40px !important;
+	transition: all 50ms linear 0s !important;
+	z-index: 5 !important;
+}
+
+
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/window_control_placeholder_support.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+/* Creates placeholders for window controls */
+/* This is a supporting file used by other stylesheets */
+
+/* This stylesheet is pretty much unnecessary if window titlebar is enabled */
+
+/* This file should preferably be imported before other stylesheets */
+
+/* Defaults for window controls on RIGHT side of the window */
+/* Modify these values to match your preferences */
+:root[tabsintitlebar]{
+  --uc-window-control-width: 138px; /* Space reserved for window controls (Win10) */
+  /* Extra space reserved on both sides of the nav-bar to be able to drag the window */
+  --uc-window-drag-space-pre: 30px; /* left side*/
+  --uc-window-drag-space-post: 30px; /* right side*/
+}
+
+:root[tabsintitlebar][sizemode="maximized"] {
+  --uc-window-drag-space-pre: 0px; /* Remove pre space */
+}
+
+@media (-moz-os-version: windows-win7), (-moz-os-version: windows-win8) {
+  :root[tabsintitlebar] {
+    --uc-window-control-width: 105px;
+  }
+}
+
+@media (-moz-gtk-csd-available) {
+  :root[tabsintitlebar] {
+    --uc-window-control-width: 84px;
+  }
+}
+
+/* macOS settings are further below */
+
+:root[sizemode="fullscreen"] .titlebar-buttonbox-container{ display: none !important }
+:root[sizemode="fullscreen"] #navigator-toolbox { position: relative; }
+:root[sizemode="fullscreen"] #window-controls{
+  position: absolute;
+  display: flex;
+  top: 0;
+  right:0;
+  height: 40px;
+}
+:root[uidensity="compact"][sizemode="fullscreen"] #window-controls{ height: 32px }
+#nav-bar{
+  border-inline: var(--uc-window-drag-space-pre,0px) solid var(--toolbar-bgcolor);
+  border-inline-style: solid !important;
+  border-right-width: calc(var(--uc-window-control-width,0px) + var(--uc-window-drag-space-post,0px));
+}
+
+/* Use this pref to check Mac OS where window controls are on left */
+/* This pref defaults to true on Mac and doesn't actually do anything on other platforms. So if your system has window controls on LEFT side you can set the pref to true */
+@supports -moz-bool-pref("layout.css.osx-font-smoothing.enabled"){
+  :root{ --uc-window-control-width: 72px; }
+  :root[tabsintitlebar="true"]:not([inFullscreen]) #nav-bar{
+    border-inline-width: calc(var(--uc-window-control-width,0px) + var(--uc-window-drag-space-post,0px)) var(--uc-window-drag-space-pre,0px)
+  }
+}
+
+
+
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/hide_tabs_toolbar_osx.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+/* Hides tabs toolbar - OSX only */
+
+/* IMPORTANT */
+/*
+Get window_control_placeholder_support.css
+Window controls will be all wrong without it
+*/
+
+:root{ --uc-toolbar-height: 32px; }
+:root:not([uidensity="compact"]){ --uc-toolbar-height: 34px }
+
+#TabsToolbar > *{ visibility: collapse !important }
+:root[sizemode="fullscreen"] #TabsToolbar > #window-controls{ visibility: visible !important; z-index: 2 }
+#TabsToolbar > .titlebar-buttonbox-container{
+  visibility: visible !important;
+  height:var(--uc-toolbar-height) !important;
+}
+
+#nav-bar{
+  margin-top: calc(0px - var(--uc-toolbar-height));
+}
+ /* :root[inFullscreen] #navigator-toolbox{ margin-top: 11px } */
+
+
+/* NOTE: Previously was using https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/autohide_tabstoolbar.css
+   with the following modification:
+
+  MY ADDITION (so that it's easier to hover)
+  :root:not([customizing]) #navigator-toolbox[inFullscreen]{
+    padding-bottom: 15px;
+  }
+*/
