@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Launch Typora.app with the given file or directory
+
+if [ $# -eq 0 ]; then
+    echo "Usage: typora <file-or-directory>"
+    exit 1
+fi
+
+# Get the path argument
+TARGET="$1"
+
+# Check if the target exists
+if [ ! -e "$TARGET" ]; then
+    echo "Error: '$TARGET' does not exist"
+    exit 1
+fi
+
+# Open with Typora
+open -a Typora.app "$TARGET"

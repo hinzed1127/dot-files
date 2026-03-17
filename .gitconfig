@@ -1,0 +1,28 @@
+[credential]
+	helper = osxkeychain
+[user]
+	name = Dan Hinze
+	email = hinzed1127@gmail.com
+[push]
+	autoSetupRemote = true
+[core]
+	editor = code --wait
+  pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
+[merge]
+    conflictstyle = zdiff3
+[init]
+	defaultBranch = main
+[alias]
+	co = checkout
+
+	ls = ! cd ${GIT_PREFIX:-.} && git ls-files -z ':(glob)*' | xargs -0 -n1 -I{} -- git log -1 --pretty=format:'%<(20,trunc)%aN %<(12)%h%<(24)%ar%x1b]8%x3b%x3bfile:{}%x1b\\{}%x1b]8%x3b%x3b%x1b\\' {}
+
+	# Show branches, verbosely, sorted by last touch, with commit messages.
+	brv = "!f() { git branch --sort=-creatordate --color=always --format='%(color:reset)%(creatordate:short) %(color:bold white)%(align:2,right)%(upstream:trackshort)%(end)%(color:nobold) %(align:40,left)%(color:yellow)%(refname:short)%(end) %(color:reset)%(contents:subject)'; }; f"
+	gone = !git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\"
+	rm-gone = !git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\" | cut -f1 -d \" \" | xargs -I{} git branch -D {}

@@ -1,0 +1,315 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+
+// Exaple Defaults
+// [
+//   {
+//     "context": "Workspace",
+//     "bindings": {
+//       // "shift shift": "file_finder::Toggle"
+//     },
+//   },
+//   {
+//     "context": "Editor && vim_mode == insert",
+//     "bindings": {
+//       // "j k": "vim::NormalBefore"
+//     },
+//   },
+// ]
+
+[
+  // Terminal bindings
+  {
+    "context": "Workspace",
+    "bindings": {
+      // Toggle terminal
+      "ctrl-cmd-t": "workspace::ToggleBottomDock",
+      "ctrl-`": "workspace::ToggleBottomDock",
+
+      // New terminal
+      "ctrl-shift-`": "terminal::NewTerminal",
+
+      // Focus terminal (toggles bottom dock where terminal lives)
+      "ctrl-shift-cmd-t": "workspace::ToggleBottomDock",
+
+      // Focus editor from terminal (no direct equivalent - use pane navigation)
+      // "ctrl-shift-cmd-e": "workspace::ActivatePane", // REMOVED: invalid action
+    },
+  },
+
+  // Editor layout bindings
+  {
+    "context": "Workspace",
+    "bindings": {
+      // Layout commands
+      "alt-cmd-1": "workspace::CloseAllDocks",
+      "alt-cmd-2": "pane::SplitRight",
+      "shift-alt-cmd-2": "pane::SplitDown",
+      "alt-cmd-3": ["workspace::SendKeystrokes", "cmd-k right cmd-k right"],
+      "alt-cmd-5": ["workspace::SendKeystrokes", "cmd-k down cmd-k right"],
+      "alt-cmd-6": ["workspace::SendKeystrokes", "cmd-k down cmd-k down"],
+
+      // Move editor between panes
+      "cmd-k shift-right": "pane::MoveItemToNextPane",
+      "cmd-k shift-up": "pane::MoveItemToPreviousPane",
+      "cmd-k shift-down": "pane::MoveItemToNextPane",
+      "cmd-k shift-left": "pane::MoveItemToPreviousPane",
+
+      // Move editor to adjacent group
+      "shift-alt-cmd-n": "pane::MoveItemToNextPane",
+      "shift-alt-cmd-p": "pane::MoveItemToPreviousPane",
+
+      // Minimize/maximize
+      "shift-alt-enter": "pane::CloseInactiveTabsAndPanes",
+      "shift-alt-cmd-m": "workspace::ToggleCenteredLayout",
+
+      // Even editor widths (not directly available in Zed)
+      // Activity bar visibility
+      "cmd-k cmd-a": "workspace::ToggleLeftDock",
+    },
+  },
+
+  // Navigation between panes and groups
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift-alt-n": "pane::ActivateNextItem",
+      "shift-alt-p": "pane::ActivatePreviousItem",
+      "alt-cmd-left": "pane::ActivatePreviousItem",
+      "alt-cmd-right": "pane::ActivateNextItem",
+    },
+  },
+
+  // Terminal-specific bindings
+  {
+    "context": "Terminal",
+    "bindings": {
+      // Clear terminal
+      "cmd-k": "terminal::Clear",
+      "cmd-ctrl-k": "terminal::Clear",
+
+      // Toggle between terminal and editor (no direct equivalent - removed)
+      // "ctrl-;": "workspace::ActivatePane", // REMOVED: invalid action
+
+      // Navigate between terminals (Zed doesn't have direct pane navigation commands)
+      // "ctrl-cmd-]": "workspace::ActivateNextPane", // REMOVED: invalid action
+      // "ctrl-cmd-[": "workspace::ActivatePreviousPane", // REMOVED: invalid action
+
+      // Terminal pane navigation
+      "alt-cmd-left": "pane::ActivatePreviousItem",
+      "alt-cmd-right": "pane::ActivateNextItem",
+
+      // Line continuation in terminal
+      "shift-enter": ["terminal::SendText", "\\\n"],
+    },
+  },
+
+  // Editor-specific bindings
+  {
+    "context": "Editor",
+    "bindings": {
+      // Toggle between terminal and editor (use bottom dock toggle instead)
+      "ctrl-;": "workspace::ToggleBottomDock",
+
+      // Clear terminal from editor
+      "ctrl-l": ["workspace::SendKeystrokes", "ctrl-` cmd-k ctrl-`"],
+
+      // Find and replace
+      "shift-alt-cmd-f": "buffer_search::DeployReplace",
+
+      // Case sensitivity and whole word toggles
+      "shift-alt-cmd-c": "search::ToggleCaseSensitive",
+      "shift-alt-cmd-w": "search::ToggleWholeWord",
+
+      // Increment/decrement numbers (not available in Zed)
+      // "shift-up": "editor::IncrementNumber", // REMOVED: invalid action
+      // "shift-down": "editor::DecrementNumber", // REMOVED: invalid action
+    },
+  },
+
+  // Panel positioning
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift-alt-cmd-r": "workspace::ToggleRightDock",
+      "shift-alt-cmd-d": "workspace::ToggleBottomDock",
+      "shift-alt-cmd-e": "workspace::ToggleLeftDock",
+      "shift-alt-cmd-b": "workspace::ToggleLeftDock",
+      "ctrl-shift-alt-cmd-r": "workspace::ToggleRightDock",
+    },
+  },
+
+  // Terminal panel maximization
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-cmd-enter": "workspace::ToggleZoom",
+    },
+  },
+
+  // Debug and run commands
+  {
+    "context": "Workspace",
+    "bindings": {
+      // Run without debugging
+      "ctrl-alt-cmd-r": "task::Rerun",
+
+      // Focus debug console/REPL (no direct ToggleFocus - use debug_panel instead)
+      "ctrl-shift-cmd-d": "debug_panel::ToggleFocus",
+    },
+  },
+
+  // Language-specific run commands
+  {
+    "context": "Editor",
+    "bindings": {
+      // JavaScript (simplified context - mode conditions may not work)
+      "cmd-alt-r": [
+        "workspace::SendKeystrokes",
+        "ctrl-` node '${file}' enter ctrl-`",
+      ],
+    },
+  },
+
+  // View size adjustments
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-=": "workspace::IncreaseBufferFontSize",
+      "ctrl-shift--": "workspace::DecreaseBufferFontSize",
+    },
+  },
+
+  // Search panel
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift-alt-cmd-s": "search::CollapseAllResults",
+    },
+  },
+
+  // Copy file paths
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-cmd-r": "workspace::CopyRelativePath",
+      "alt-cmd-c": "workspace::CopyPath",
+      // "ctrl-cmd-n": "file_finder::CopyFileName", // REMOVED: invalid action
+    },
+  },
+
+  // Git/GitHub integration
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift-alt-cmd-g": "editor::OpenPermalinkToLine",
+      "ctrl-shift-cmd-g": "branches::OpenRecent",
+      "cmd-k cmd-g": "editor::OpenPermalinkToLine",
+      "shift-alt-b": "editor::ToggleGitBlame",
+      "ctrl-alt-cmd-b": "editor::ToggleGitBlame",
+    },
+  },
+
+  // Project panel
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "ctrl-shift-c": "project_panel::CollapseAllEntries",
+    },
+  },
+
+  // Breadcrumbs
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-b": "outline::Toggle",
+    },
+  },
+
+  // Tab management (tab bar toggle not available in Zed)
+  // {
+  //   "context": "Workspace",
+  //   "bindings": {
+  //     "shift-alt-t": "tab_bar::ToggleTabBar", // REMOVED: invalid action
+  //   },
+  // },
+
+  // Diff view
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-i": "editor::ToggleHunkDiff",
+    },
+  },
+
+  // Duplicate workspace
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-d": "workspace::NewWindow",
+    },
+  },
+
+  // Terminal creation
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift-alt-cmd-t": "terminal::NewTerminal",
+    },
+  },
+
+  // Format document
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-alt-f": "editor::Format",
+    },
+  },
+
+  // Image preview zoom (if extension available)
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift-alt-cmd-=": "workspace::IncreaseBufferFontSize",
+      "shift-alt-cmd--": "workspace::DecreaseBufferFontSize",
+    },
+  },
+
+  // Rerun last command (requires Tasks setup)
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-alt-r": "task::Rerun",
+    },
+  },
+
+  // Terminal relaunch
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-shift-r": "terminal::Clear",
+    },
+  },
+
+  // REPL/Debug console clearing (Clear action not available - only Run/RunInPlace)
+  // {
+  //   "context": "REPL",
+  //   "bindings": {
+  //     "cmd-k": "repl::Clear", // REMOVED: invalid action
+  //   },
+  // },
+
+  // Disable conflicting default bindings
+  {
+    "context": "Workspace",
+    "bindings": {
+      // Disable default cmd-k behavior in favor of terminal clear
+      "cmd-k cmd-b": null,
+    },
+  },
+]
