@@ -1,0 +1,1 @@
+/Users/dan.hinze@innovation.nj.gov/.config/LS_COLORS/lscolors.csh
