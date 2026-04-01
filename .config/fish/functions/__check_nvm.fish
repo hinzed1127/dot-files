@@ -1,7 +1,11 @@
 function __check_nvm --on-variable PWD --description 'Do nvm stuff'
   if test -f .nvmrc
-    set node_version (node -v)
     set node_version_target (cat .nvmrc)
+    if not command -q node
+      nvm use $node_version_target
+      return
+    end
+    set node_version (node -v)
     set nvmrc_node_version (nvm list | grep $node_version_target)
 
     if string match -q -- "*$node_version" $nvmrc_node_version
