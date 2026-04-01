@@ -2,6 +2,13 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+# Homebrew - supports both Apple Silicon (/opt/homebrew) and Intel (/usr/local)
+if test -x /opt/homebrew/bin/brew
+    /opt/homebrew/bin/brew shellenv | source
+else if test -x /usr/local/bin/brew
+    /usr/local/bin/brew shellenv | source
+end
+
 source ~/.config/lscolors.csh # see https://github.com/trapd00r/LS_COLORS
 
 # https://blog.smittytone.net/2020/06/14/give-macos-terminal-a-better-ls/
