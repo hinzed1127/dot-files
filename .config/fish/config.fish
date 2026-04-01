@@ -31,16 +31,11 @@ set --export PATH $BUN_INSTALL/bin $PATH
 #     bash -c 'source ./api/scripts/aws-switch.sh $1' bash $argv
 # end
 
-# Added by Windsurf
-fish_add_path /Users/dan-hinze/.codeium/windsurf/bin
-
 # Add personal bin directory to PATH
 fish_add_path ~/bin
 
 # pnpm
 set --export COREPACK_ENABLE_AUTO_PIN 0
-
-string match -q "$TERM_PROGRAM" "kiro" and . (kiro --locate-shell-integration-path fish)
 
 # Added by `rbenv init` on Wed Feb 11 14:43:22 CST 2026
 status --is-interactive; and rbenv init - --no-rehash fish | source
