@@ -1,0 +1,10 @@
+# Fisher plugin files - managed by fisher, not yadm
+# Only fish_plugins should be tracked
+functions/fisher.fish
+functions/nvm.fish
+functions/_nvm_*.fish
+functions/bass.fish
+functions/__bass.py
+completions/fisher.fish
+completions/nvm.fish
+conf.d/nvm.fish
