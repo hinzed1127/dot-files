@@ -38,8 +38,13 @@ set --export PATH $BUN_INSTALL/bin $PATH
 #     bash -c 'source ./api/scripts/aws-switch.sh $1' bash $argv
 # end
 
-# Add personal bin directory to PATH
-fish_add_path ~/bin
+# Add personal bin directory to PATH (global, not universal — keeps fish_variables portable)
+fish_add_path -g ~/bin
+
+# Windsurf editor (machine-specific — only add if installed)
+if test -d ~/.codeium/windsurf/bin
+    fish_add_path -g ~/.codeium/windsurf/bin
+end
 
 # pnpm
 set --export COREPACK_ENABLE_AUTO_PIN 0
