@@ -1,0 +1,3 @@
+I have 3 files outlining the approach to implementing a feature: @plan.md, @tdd-prompts.md, and @todo.md. The original feature is defined in @spec.md. @todo.md is mostly just a checklist of @plan.md, but with the important addition that each step follows the test driven development philosophy: write tests that fail initially and only adding the bare necessity of code to get each test passing. @tdd-prompts.md outlines the specific test(s) you should write and get passing at each step. Implement this feature accordingly. Commit and push your code after each step in @todo.md is completed with the corresponding test(s) in @tdd-prompts.md passing.
+
+All of these files can be found in the following directory:
