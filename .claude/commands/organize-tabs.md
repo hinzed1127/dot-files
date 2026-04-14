@@ -11,6 +11,7 @@ A few additional rules:
   - https://docs.google.com -> Google Doc | 
 - For any URLs that include "substack.com", e.g. https://some-newsletter-name.substack.com/some-article, append "(Substack)" to the end of the link title
 - If there are any other similar categorical labels like the aforementioned ones (Github, ADO, Hacker News, Google Doc, Substack, etc), feel free to update the matching URL titles in similar ways
+- Instagram tabs usually don't have page titles that are really descriptive. Do what you can go improve these, either via the rest of the url or other ways to examine the link like quickly grabbing the metadata or fetching the page to examine it
 - I use Freedom, a screen time app that helps block distracting websites when it's on. A side effect of this is it prepends any blocked sites with `https://blocked.freedom.to/?url=` before the original URL. Strip that out and include a title for the original URL if you're able.
 
 The tabs are in this file: 
