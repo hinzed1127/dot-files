@@ -51,3 +51,6 @@ set --export COREPACK_ENABLE_AUTO_PIN 0
 
 # Added by `rbenv init` on Wed Feb 11 14:43:22 CST 2026
 status --is-interactive; and rbenv init - --no-rehash fish | source
+
+# Created by `pipx` on 2026-04-08 21:53:34
+set PATH $PATH /Users/dan-hinze/.local/bin
