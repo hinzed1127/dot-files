@@ -26,8 +26,11 @@ alias aws-prod='aws --profile nav-prod'
 alias ccwork='set CLAUDE_CODE_USE_BEDROCK 1'
 alias ccpersonal='set CLAUDE_CODE_USE_BEDROCK 0'
 
-# https://gist.github.com/eugenet8k/535bf3c51d1fc7c31cb8784e55d4dae4?permalink_comment_id=4763145#gistcomment-4763145
-status is-interactive && __check_nvm
+# Initialize original nvm via bass, activating the default node version
+if status is-interactive
+    bass source ~/.nvm/nvm.sh
+    __check_nvm
+end
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"

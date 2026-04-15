@@ -1,20 +1,6 @@
-function __check_nvm --on-variable PWD --description 'Do nvm stuff'
-  if test -f .nvmrc
-    set node_version_target (cat .nvmrc)
-    if not command -q node
-      nvm use $node_version_target
-      return
+function __check_nvm --on-variable PWD --description 'Auto-switch node version from .nvmrc'
+    if test -f .nvmrc
+        nvm use 2>/dev/null
+        or nvm install
     end
-    set node_version (node -v)
-    set nvmrc_node_version (nvm list | grep $node_version_target)
-
-    if string match -q -- "*$node_version" $nvmrc_node_version
-      # already current node version
-    else if not set -q $nvmrc_node_version
-      # install
-      nvm install $node_version_target
-    else
-      nvm use $node_version_target
-    end
-  end
 end
