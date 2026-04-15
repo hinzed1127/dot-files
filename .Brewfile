@@ -35,5 +35,7 @@ cask "sublime-text"
 cask "swinsian"
 cask "typora"
 cask "visual-studio-code"
-cask "yubico-authenticator"
+# yubico nice for work machine, but
+# probably not needed for personal
+# cask "yubico-authenticator"
 
