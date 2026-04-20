@@ -1,1 +1,1 @@
-/Users/dan-hinze/Code/arc-to-notes/arc-tabs-to-json.applescript
+../Code/arc-to-notes/arc-tabs-to-json.applescript
