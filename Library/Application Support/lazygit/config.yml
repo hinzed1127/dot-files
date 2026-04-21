@@ -1,0 +1,38 @@
+gui:
+  theme:
+    # Active panel border — Aura purple
+    activeBorderColor:
+      - '#a277ff'
+      - bold
+    # Inactive panel borders — Aura gray
+    inactiveBorderColor:
+      - '#6d6d6d'
+    # Search-mode active border — Aura blue
+    searchingActiveBorderColor:
+      - '#82e2ff'
+      - bold
+    # Bottom options bar text — Aura purple
+    optionsTextColor:
+      - '#a277ff'
+    # Selected line highlight — approximates Aura's purple-fading selection
+    selectedLineBgColor:
+      - '#3d375e'
+    # Selected line in inactive panels — subtler
+    inactiveViewSelectedLineBgColor:
+      - '#1e1c27'
+    # Unstaged changes marker — Aura red
+    unstagedChangesColor:
+      - '#ff6767'
+    # Default foreground — Aura white
+    defaultFgColor:
+      - '#edecee'
+    # Cherry-pick commit — orange text on purple bg
+    cherryPickedCommitFgColor:
+      - '#ffca85'
+    cherryPickedCommitBgColor:
+      - '#a277ff'
+    # Marked base commit (rebase) — black text on orange bg
+    markedBaseCommitFgColor:
+      - '#15141b'
+    markedBaseCommitBgColor:
+      - '#ffca85'
