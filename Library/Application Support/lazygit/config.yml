@@ -1,3 +1,17 @@
+os:
+  # Opens files in VS Code (matches core.editor = code --wait)
+  editPreset: vscode
+
+git:
+  pagers:
+    # --paging=never prevents delta from launching its own pager inside lazygit
+    - pager: delta --dark --paging=never
+  autoFetch: true
+
+refresher:
+  # Fetch every 5 minutes (matches git.autofetch: true in VS Code)
+  fetchInterval: 300
+
 gui:
   theme:
     # Active panel border — Aura purple
