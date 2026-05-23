@@ -8,6 +8,7 @@
 [core]
 	editor = code --wait
   pager = delta
+	excludesfile = ~/.gitignore_global
 [interactive]
     diffFilter = delta --color-only
 [delta]
@@ -26,3 +27,7 @@
 	brv = "!f() { git branch --sort=-creatordate --color=always --format='%(color:reset)%(creatordate:short) %(color:bold white)%(align:2,right)%(upstream:trackshort)%(end)%(color:nobold) %(align:40,left)%(color:yellow)%(refname:short)%(end) %(color:reset)%(contents:subject)'; }; f"
 	gone = !git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\"
 	rm-gone = !git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\" | cut -f1 -d \" \" | xargs -I{} git branch -D {}
+[commit]
+	template = ~/.stCommitMsg
+[include]
+	path = ~/.gitconfig.local

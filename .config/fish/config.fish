@@ -11,6 +11,15 @@ end
 
 source ~/.config/lscolors.csh # see https://github.com/trapd00r/LS_COLORS
 
+# Default editor
+set -gx EDITOR "code --wait"
+set -gx VISUAL "code --wait"
+
+# Colorized man pages via bat
+set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -gx MANWIDTH 999
+set -gx BAT_THEME "aura-theme"
+
 # https://blog.smittytone.net/2020/06/14/give-macos-terminal-a-better-ls/
 alias ls="gls --group-directories-first  --color=auto --format=single-column -X"
 alias lsa="ls -a"
@@ -19,15 +28,27 @@ alias gs="git status"
 alias gd="git diff"
 alias glog="git log"
 
-alias aws-dev='aws --profile nav-dev'
-alias aws-prod='aws --profile nav-prod'
+
+# Default to dev profile in new shells; preserve explicitly switched profiles
+if not set -q AWS_PROFILE
+    set -gx AWS_PROFILE innov-dev
+end
+
+# alias aws-dev='aws --profile innov-dev'
+# alias aws-prod='aws --profile innov-prod'
+
+# Default to claude w/o bedrock in new shells;
+if not set -q CLAUDE_CODE_USE_BEDROCK
+    set -gx CLAUDE_CODE_USE_BEDROCK 0
+end
 
 # I don't know if these are still needed. Might be able to just use the `/login` command within Claude Code
-alias ccwork='set CLAUDE_CODE_USE_BEDROCK 1'
-alias ccpersonal='set CLAUDE_CODE_USE_BEDROCK 0'
+alias ccwork='set -gx CLAUDE_CODE_USE_BEDROCK 1'
+alias ccpersonal='set -gx CLAUDE_CODE_USE_BEDROCK 0'
 
-# Initialize original nvm via bass, activating the default node version
+# Initialize original nvm via bass, activating the default node version.
 if status is-interactive
+    set -g __check_nvm_last_version ""
     bass source ~/.nvm/nvm.sh
     __check_nvm
 end
@@ -56,4 +77,7 @@ set --export COREPACK_ENABLE_AUTO_PIN 0
 status --is-interactive; and rbenv init - --no-rehash fish | source
 
 # Created by `pipx` on 2026-04-08 21:53:34
-set PATH $PATH /Users/dan-hinze/.local/bin
+fish_add_path -g ~/.local/bin
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/ccbox/google-cloud-sdk/path.fish.inc" ]; . "$HOME/ccbox/google-cloud-sdk/path.fish.inc"; end
