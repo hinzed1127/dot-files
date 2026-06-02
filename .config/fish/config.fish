@@ -46,11 +46,9 @@ end
 alias ccwork='set -gx CLAUDE_CODE_USE_BEDROCK 1'
 alias ccpersonal='set -gx CLAUDE_CODE_USE_BEDROCK 0'
 
-# Initialize original nvm via bass, activating the default node version.
+# Initialize nvm per https://github.com/nvm-sh/nvm#fish
 if status is-interactive
-    set -g __check_nvm_last_version ""
-    bass source ~/.nvm/nvm.sh
-    __check_nvm
+    load_nvm > /dev/stderr
 end
 
 # bun
