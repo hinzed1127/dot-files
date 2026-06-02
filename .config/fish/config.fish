@@ -9,6 +9,11 @@ else if test -x /usr/local/bin/brew
     /usr/local/bin/brew shellenv | source
 end
 
+# Re-prepend nvm's active node after Homebrew overwrites PATH
+if set --query nvm_current_version
+    fish_add_path -gm $nvm_data/$nvm_current_version/bin
+end
+
 source ~/.config/lscolors.csh # see https://github.com/trapd00r/LS_COLORS
 
 # Default editor
@@ -45,11 +50,6 @@ end
 # I don't know if these are still needed. Might be able to just use the `/login` command within Claude Code
 alias ccwork='set -gx CLAUDE_CODE_USE_BEDROCK 1'
 alias ccpersonal='set -gx CLAUDE_CODE_USE_BEDROCK 0'
-
-# Initialize nvm per https://github.com/nvm-sh/nvm#fish
-if status is-interactive
-    load_nvm > /dev/stderr
-end
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
