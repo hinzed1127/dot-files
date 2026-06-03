@@ -79,3 +79,8 @@ fish_add_path -g ~/.local/bin
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/ccbox/google-cloud-sdk/path.fish.inc" ]; . "$HOME/ccbox/google-cloud-sdk/path.fish.inc"; end
+
+# Auto-switch node version on shell startup (nvm_auto_switch handles cd via --on-variable PWD)
+if status is-interactive
+    nvm_auto_switch
+end
