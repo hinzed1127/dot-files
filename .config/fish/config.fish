@@ -33,6 +33,15 @@ alias gs="git status"
 alias gd="git diff"
 alias glog="git log"
 
+function ado-items --description "List open ADO work items assigned to me"
+    az boards query --wiql "SELECT [System.Id],[System.Title],[System.State],[System.WorkItemType],[System.TeamProject] FROM WorkItems WHERE [System.AssignedTo] = @me AND [System.State] <> 'Done' AND [System.State] <> 'Closed' ORDER BY [System.ChangedDate] DESC" | jq '[.[] | {id: .fields["System.Id"], project: .fields["System.TeamProject"], type: .fields["System.WorkItemType"], title: .fields["System.Title"], state: .fields["System.State"]}]'
+end
+
+function ado-open --description "Open an ADO work item in the browser by ID"
+    # az boards work-item show --id $argv[1] --open  (also works but dumps JSON output)
+    open "https://dev.azure.com/NJInnovation/_workitems/edit/$argv[1]"
+end
+
 
 # Default to dev profile in new shells; preserve explicitly switched profiles
 if not set -q AWS_PROFILE
@@ -50,6 +59,9 @@ end
 # I don't know if these are still needed. Might be able to just use the `/login` command within Claude Code
 alias ccwork='set -gx CLAUDE_CODE_USE_BEDROCK 1'
 alias ccpersonal='set -gx CLAUDE_CODE_USE_BEDROCK 0'
+
+alias brew-do-spencer-mode='brew update && brew upgrade && brew cleanup'
+alias bdsm='brew-do-spencer-mode'
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
@@ -84,3 +96,6 @@ if [ -f "$HOME/ccbox/google-cloud-sdk/path.fish.inc" ]; . "$HOME/ccbox/google-cl
 if status is-interactive
     nvm_auto_switch
 end
+
+# Added by Devin
+fish_add_path /Users/dan.hinze@innovation.nj.gov/.codeium/windsurf/bin
