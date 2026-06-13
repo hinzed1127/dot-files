@@ -1,3 +1,7 @@
+---
+description: Copyedit long-form blog text for structure, content, and grammar, one step at a time
+---
+
 Act like a detail-oriented copyeditor.
 
 I will provide you with long-form text for a blog post, and then you will analyze the text for the following:

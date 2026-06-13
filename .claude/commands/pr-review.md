@@ -1,3 +1,7 @@
+---
+description: Senior-engineer review of this branch's PR, saved to docs/pr-reviews/[branch-name]-review.md
+---
+
 The current git branch has been made a PR in Github. Please review this PR as if you were a senior engineer.
 
 ## Focus Areas

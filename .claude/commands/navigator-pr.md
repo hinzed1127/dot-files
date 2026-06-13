@@ -1,3 +1,8 @@
+---
+description: Create a PR for this branch using the repo PR template, with ADO ticket linking (AB#ticketNumber)
+argument-hint: [AB# ticket number]
+---
+
 Create a pull request of this branch, and use @.github/pull_request_template.md as the starting point for the pull request's description. When you fill out the description:
 
 - Keep things brief and to the point.

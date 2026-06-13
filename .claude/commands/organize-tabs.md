@@ -1,3 +1,8 @@
+---
+description: Reorganize the "#links" browser-tab list in a daily note into sensible categories with cleaned-up titles
+argument-hint: <daily note file>
+---
+
 In my daily notes files, I keep a markdown list of all my browser tabs currently open, all under a top-level h2 element titled "#links". Organize this list into more sensible categories than the current H3s. Feel free to rename any of the link titles, as well, but only if they are too lengthy or could clearly be more descriptive based on the the full URL contents. Save your results in the same file, overwriting it.
 
 A few additional rules:

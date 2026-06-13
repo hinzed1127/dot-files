@@ -1,3 +1,7 @@
+---
+description: Fill out the PR template for this branch's changes and save it to [branch-name]-pr-description.md, without creating a PR
+---
+
 **DO NOT** create a pull request, but fill out @.github/pull_request_template.md as if you were going to create a pull request for the current set of changes on this branch. When you fill out the description:
 
 - Keep things brief and to the point. I don't want someone to have to deal with a wall of text, just a concise overview of the changes this makes.

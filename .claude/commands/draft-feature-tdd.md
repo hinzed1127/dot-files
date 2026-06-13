@@ -1,3 +1,8 @@
+---
+description: Draft a TDD implementation blueprint from a spec, producing plan.md (with per-step prompts) and todo.md
+argument-hint: <spec file>
+---
+
 Draft a detailed, step-by-step blueprint for building this functionality. Then, once you have a solid plan, break it down into small, iterative chunks that build on each other. Look at these chunks and then go another round to break it into small steps. Review the results and make sure that the steps are small enough to be implemented safely with strong testing, but big enough to move the feature forward. Iterate until you feel that the steps are right sized for this feature.
 
 From here you should have the foundation to provide a series of prompts for a code-generation LLM that will implement each step in a test-driven manner. Prioritize best practices, incremental progress, and early testing, ensuring no big jumps in complexity at any stage. Make sure that each prompt builds on the previous prompts, and ends with wiring things together. There should be no hanging or orphaned code that isn't integrated into a previous step.
