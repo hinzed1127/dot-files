@@ -7,6 +7,25 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "proxy": "",
+  "git_panel": {
+    "dock": "left"
+  },
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "cli_default_open_behavior": "new_window",
+  "session": {
+    "trust_all_worktrees": false
+  },
   "sticky_scroll": {
     "enabled": false,
   },
@@ -22,7 +41,12 @@
     "activate_on_close": "left_neighbour",
   },
   "file_types": {
-    "html": ["*.html", "*.html"],
+    "html": [
+      "*.html",
+      "*.html",
+      "*.html",
+      "*.html"
+    ],
   },
   "use_on_type_format": false,
   "ensure_final_newline_on_save": true,
@@ -31,6 +55,10 @@
   "selection_highlight": false,
   "restore_on_file_reopen": false,
   "agent": {
+    "sidebar_side": "right",
+    "dock": "right",
+    "single_file_review": true,
+    "notify_when_agent_waiting": "primary_screen",
     "default_model": {
       "provider": "anthropic",
       "model": "claude-3-7-sonnet-latest",
@@ -42,6 +70,6 @@
   "theme": {
     "mode": "system",
     "light": "Aura Dark",
-    "dark": "One Dark",
+    "dark": "Aura Dark (Soft Text)",
   },
 }

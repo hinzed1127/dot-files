@@ -7,5 +7,8 @@ description: Fill out the PR template for this branch's changes and save it to [
 - Keep things brief and to the point. I don't want someone to have to deal with a wall of text, just a concise overview of the changes this makes.
 - Don't include things that I can already view in the GitHub UI, such as the files changed and the number of lines added and deleted for each changed file
 - The most important thing is straightforward instructions for the steps to test that are easy to reproduce.
+- If you don't see a clear ticket ID to link to, either in commit names and descriptions or elsewhere, ask me and I'll clarify if it has one.
 
 Save the output to `[branch-name]-pr-description.md`, where `[branch-name]` is the name of this git branch.
+
+Ask any clarifying questions you have.
