@@ -99,3 +99,8 @@ end
 
 # Added by Devin
 fish_add_path /Users/dan.hinze@innovation.nj.gov/.codeium/windsurf/bin
+
+# Open the navigator VS Code workspace
+if status is-interactive
+    abbr -a cnav code ~/Code/workspaces/navigator.code-workspace
+end
