@@ -1,0 +1,251 @@
+{
+  "awsAuthRefresh": "aws sso login --profile innov-dev",
+  "env": {
+    "CLAUDE_CODE_ENABLE_AUTO_MODE": "1"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "permissions": {
+    "allow": [
+      "Bash(bun run test)",
+      "Bash(bun run test *)",
+      "Bash(pnpm test)",
+      "Bash(pnpm test *)",
+      "Bash(pnpm typecheck)",
+      "Bash(pnpm lint)",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "mcp__plugin_figma_figma__get_design_context"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "opus",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/notify-claude-input.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/notify-claude-input.sh"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "TeammateIdle": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/reflow-markdown.sh",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -r '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ] && [ -x '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh' ]; then /bin/sh '/Users/dan.hinze@innovation.nj.gov/.orca/agent-hooks/claude-hook.sh'; else { command -p cat 2>/dev/null || cat; } >/dev/null 2>&1 || :; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "enableWorkflows": true,
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/dan.hinze@innovation.nj.gov/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "claude-md-management@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": true,
+    "cc-plugin-you-should-know@builtin": true
+  },
+  "extraKnownMarketplaces": {
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      },
+      "autoUpdate": true
+    }
+  },
+  "alwaysThinkingEnabled": false,
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "editorMode": "normal",
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "useAutoModeDuringPlan": true,
+  "autoMode": {
+    "soft_deny": [
+      "$defaults",
+      "Bash(az devops:*) in ~/Code/navigator.business.nj.gov — write/update Azure DevOps work items (routine use is read/scan via scripts/refresh_ado_boards.py; mutating az devops calls should stay soft-blocked)",
+      "AWS write/mutate calls under Innov-Prod profile — the analyze-navigator-aws skill mandates read-only operations only (describe/get/list/lookup/filter, CloudWatch start-query/get-query-results)"
+    ],
+    "environment": [
+      "### Org-wide",
+      "**Organization**: New Jersey Innovation Authority (github.com/newjersey org, per repo remote)",
+      "**Cloud provider(s)**: AWS (DynamoDB, Lambda, ECS, Cognito/Amplify via CDK/Terraform); Azure (Azure DevOps work-item tracking, seen via az CLI usage)",
+      "**Repository visibility**: PUBLIC — newjersey/navigator.business.nj.gov (confirmed via gh); any push here is publishing",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: CI secrets referenced by name only (e.g. AWS_ACCESS_KEY_ID_PROD/STAGING/DEV, AWS_SECRET_ACCESS_KEY_*, AWS_CRYPTO_TAX_ID_*_KEY_*, ABC_ETP_API_*_PROD/STAGING, ADMIN_PASSWORD, BASIC_AUTH_*, CMS_OAUTH_CLIENT_SECRET) — values not gathered, treat names as sensitive handles",
+      "**Default / protected branches**: main (default); protected branches: content-repo, main (via gh; rulesets: none listed)",
+      "**CI/CD deploy targets**: GitHub Actions (.github/workflows) deploying to AWS (ECS/Lambda) across dev/staging/prod stages per CI secret naming",
+      "**Network posture**: None configured",
+      "**Source control**: newjersey/navigator.business.nj.gov (this repo) and its origin remote only",
+      "**Trusted internal domains**: dev.azure.com, innovation.nj.gov (contacted in this project's transcripts)",
+      "**Trusted cloud buckets**: nj-bfs-all-accounts-config-files (config-derived — not a confirmed upload destination; uploads of local data still require confirmation)",
+      "**Key internal services**: Azure DevOps (dev.azure.com) work-item boards (Business First Stop legacy, BizX current) per scripts/ado-boards.json and refresh-ado-boards skill",
+      "**Internal package registry**: None configured — registry.npmjs.org used (public)",
+      "**Sensitive data locations & audiences**: .env, web/.env, api/.env, .secret-* (gitignored); api/.env-template, packages/static-site/.env-template, packages/static-site/.env.local, web/.env-template; CI secret names listed above (PROD/STAGING credentials, tax-ID encryption keys, admin/basic-auth passwords) — share only with engineers cleared for production credentials",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any AWS/Azure namespace, host, or container with `prod` or `production` as a whole word/segment (e.g. AWS_ACCESS_KEY_ID_PROD, ABC_ETP_API_ACCOUNT_PROD); Innov-Prod AWS profile referenced in analyze-navigator-aws skill",
+      "**Protected deployment namespaces / environments**: Innov-Prod (AWS profile), *_PROD / *_STAGING CI secret suffixes — prod namespaces protected, staging treated as lower-sensitivity but still credentialed",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; Terraform/CDK definitions touching DynamoDB, Lambda, ECS, Cognito in prod-tagged stacks",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development (navigator.business.nj.gov — Next.js/React frontend, Express/Lambda backend, AWS CDK/Terraform infra)",
+      "**Trusted repo**: github.com/newjersey/navigator.business.nj.gov (public) — working directory and its origin remote; since public, only this repo's own work belongs here, and confidential material (secrets, PII, credentials) is never cleared into it regardless of visibility",
+      "**Org-specific CLIs**: az (Azure DevOps work-item routing via scripts/ado_boards.py, refresh-ado-boards skill); aws (via analyze-navigator-aws skill, read-only, Innov-Prod/Innov-Dev profiles)",
+      "**routine under this repo's prefix**: scripts/ado-boards.json refresh workflow, .claude/skills/analyze-navigator-aws read-only AWS investigation workflow"
+    ]
+  },
+  "voiceEnabled": false,
+  "defaultMode": "auto"
+}
