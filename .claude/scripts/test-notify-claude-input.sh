@@ -40,7 +40,7 @@ expect_empty() {
 stop_payload='{"hook_event_name":"Stop","cwd":"/Users/x/code/myproj","session_id":"abc","last_assistant_message":"All 12 tests pass."}'
 
 out=$(run_hook claude-desktop "$stop_payload")
-expect_empty "desktop app sessions are left to the app's own banners" "$out"
+expect_contains "desktop app sessions activate the Claude app on click" "$out" "com.anthropic.claudefordesktop"
 
 out=$(run_hook cli "$stop_payload")
 expect_contains "Stop shows the last assistant message" "$out" "stdin: All 12 tests pass."

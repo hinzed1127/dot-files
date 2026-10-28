@@ -10,9 +10,13 @@
 #   cwd, session_id        - project name for the title; per-session banner group
 #
 # Which app to activate comes from CLAUDE_CODE_ENTRYPOINT, which Claude Code
-# passes to hooks: "claude-desktop" (the desktop app, which posts its own
-# clickable banners, so this hook stays quiet), "claude-vscode" (VS Code
+# passes to hooks: "claude-desktop" (desktop app), "claude-vscode" (VS Code
 # extension), anything else is a terminal session in Ghostty.
+#
+# Desktop sessions get a banner here too: the app's own notifications land
+# in Notification Center but intermittently skip the on-screen banner
+# (macOS Tahoe, desktop app 4.29.0). Clicking ours brings the app forward,
+# not the specific session.
 #
 # Usage (wired into settings.json under both Stop and Notification):
 #   "command": "~/.claude/scripts/notify-claude-input.sh"
@@ -28,7 +32,7 @@ set -euo pipefail
 max_message_chars=200
 
 case "${CLAUDE_CODE_ENTRYPOINT:-}" in
-  claude-desktop) exit 0 ;;
+  claude-desktop) activate_bundle_id="com.anthropic.claudefordesktop" ;;
   claude-vscode) activate_bundle_id="com.microsoft.VSCode" ;;
   *) activate_bundle_id="com.mitchellh.ghostty" ;;
 esac
