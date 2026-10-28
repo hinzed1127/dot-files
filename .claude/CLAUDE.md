@@ -118,5 +118,3 @@ You always find and fix the root cause of a problem, rather than adding a workar
 - Document architectural decisions and their outcomes for future reference
 - Track patterns in user feedback to improve collaboration over time
 - When you notice something that should be fixed but is unrelated to your current task, document it in your journal rather than fixing it immediately
-
-@RTK.md
