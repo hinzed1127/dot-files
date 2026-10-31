@@ -75,11 +75,6 @@ set --export PATH $BUN_INSTALL/bin $PATH
 # Add personal bin directory to PATH (global, not universal — keeps fish_variables portable)
 fish_add_path -g ~/bin
 
-# Windsurf editor (machine-specific — only add if installed)
-if test -d ~/.codeium/windsurf/bin
-    fish_add_path -g ~/.codeium/windsurf/bin
-end
-
 # pnpm
 set --export COREPACK_ENABLE_AUTO_PIN 0
 
@@ -96,9 +91,6 @@ if [ -f "$HOME/ccbox/google-cloud-sdk/path.fish.inc" ]; . "$HOME/ccbox/google-cl
 if status is-interactive
     nvm_auto_switch
 end
-
-# Added by Devin
-fish_add_path /Users/dan.hinze@innovation.nj.gov/.codeium/windsurf/bin
 
 # Open the navigator VS Code workspace
 if status is-interactive

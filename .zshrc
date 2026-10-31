@@ -133,6 +133,4 @@ unset key
 [ -s "/Users/dan-hinze/.bun/_bun" ] && source "/Users/dan-hinze/.bun/_bun"
 export PATH="$HOME/bin:$PATH"
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
 . "$HOME/.local/bin/env"
