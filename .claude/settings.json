@@ -170,7 +170,7 @@
   "enableWorkflows": true,
   "statusLine": {
     "type": "command",
-    "command": "bash /Users/dan.hinze@innovation.nj.gov/.claude/statusline-command.sh"
+    "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
