@@ -28,7 +28,5 @@
 	gone = !git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\"
 	rm-gone = !git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\" | cut -f1 -d \" \" | xargs -I{} git branch -D {}
 	pf = push --force-with-lease
-[commit]
-	template = ~/.stCommitMsg
 [include]
 	path = ~/.gitconfig.local
