@@ -1,5 +1,8 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
+
+    # gpg's passphrase prompt (used by yadm encrypt/decrypt) needs to know the terminal
+    set -gx GPG_TTY (tty)
 end
 
 # Homebrew - supports both Apple Silicon (/opt/homebrew) and Intel (/usr/local)
