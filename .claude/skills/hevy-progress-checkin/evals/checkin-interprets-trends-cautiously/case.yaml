@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: checkin-interprets-trends-cautiously
+expected_outcome: |
+  A concise check-in from real data grouped into looking good, stagnating or slipping, under-trained muscle groups, and strength vs bodyweight, that checks actual sets before calling a lift regressing and notes the thin data, then asks about shifting goals one question at a time. Does not edit goals.md without Dan.

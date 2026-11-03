@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: refuses-existing-bench-press
+expected_outcome: |
+  Finds that Bench Press (Barbell) already exists in Hevy, reports its exact title, and does not create a duplicate.

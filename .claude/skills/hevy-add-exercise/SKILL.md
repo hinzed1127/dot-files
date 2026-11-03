@@ -9,10 +9,10 @@ Hevy's API has no delete or edit endpoint for exercises, so a wrong exercise sta
 
 ## Steps
 
-1. **Check the library first.** Run `python3 ~/.claude/hevy/find_exercise.py <words>` with a few different word combinations (e.g. "zercher", then "squat zercher"). Hevy's own naming is usually `Name (Equipment)`; the exercise may exist under a slightly different name. If a match exists, tell Dan the exact title and stop.
+1. **Check the library first.** Run `python3 ~/.claude/hevy/find_exercise.py <words>` with a few different word combinations (e.g. "zercher", then "squat zercher"). Hevy's own naming is usually `Name (Equipment)`; the exercise may exist under a slightly different name. If a match exists, tell Dan the exact title, id and muscles and stop. If the closest match is a near-equivalent under a different name (say Lateral Squat for a Cossack Squat), tell him what it lacks, such as a muscle tag or the ability to add weight, and continue to the dry run only if he still wants a separate exercise.
 2. **Map Dan's description to Hevy's fields.** Ask one question at a time for what's missing:
-   - title: follow Hevy's `Name (Equipment)` style, e.g. "Zercher Squat (Barbell)"
-   - type: weight_reps, reps_only, bodyweight_reps, bodyweight_assisted_reps, duration, weight_duration, distance_duration, short_distance_weight
+   - title: mirror Hevy's naming. Equipment exercises read `Name (Equipment)`, e.g. "Bench Press (Barbell)"; bodyweight exercises have no suffix. When similar library titles exist, copy their pattern.
+   - type: weight_reps, reps_only, bodyweight_reps, bodyweight_assisted_reps, duration, weight_duration, distance_duration, short_distance_weight. For a bodyweight movement, ask whether he'd ever want to log added weight: bodyweight_reps if yes, reps_only if no.
    - equipment: none, barbell, dumbbell, kettlebell, machine, plate, resistance_band, suspension, other
    - primary muscle: abdominals, shoulders, biceps, triceps, forearms, quadriceps, hamstrings, calves, glutes, abductors, adductors, lats, upper_back, traps, lower_back, chest, cardio, neck, full_body, other
    - secondary muscles (optional, same list)

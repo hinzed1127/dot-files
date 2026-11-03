@@ -15,6 +15,7 @@ Plan from real logged data, not generic templates. The numbers come from scripts
   1. **Focus**: which muscle groups, or full body? Always ask if he didn't say.
   2. **Injuries today**: ask if goals.md lists something unconfirmed or old, or if he didn't mention any.
   3. **Scope**: assume just the next workout. Plan a week only if he asks (then ask how many sessions).
+- What Dan says today beats goals.md. If today's injury differs from or adds to what goals.md lists, plan around today's and mention the difference in one line.
 
 ## 2. Pull the data
 
@@ -22,7 +23,7 @@ Plan from real logged data, not generic templates. The numbers come from scripts
 python3 ~/.claude/hevy/summary.py --weeks 8
 ```
 
-Prints (in lbs): body weight, recent workouts with every set, per-exercise trend, strength vs bodyweight, weekly sets per muscle and days since each was last trained. It reads the API key from `~/.claude/hevy/.env`; if that is missing, tell Dan to run `yadm decrypt`. To look up an exercise's exact title or id: `python3 ~/.claude/hevy/find_exercise.py bench press`.
+Prints (in lbs): body weight, recent workouts with every set, per-exercise trend, strength vs bodyweight, weekly sets per muscle (averaged over the weeks since his first workout in the window, shown in the heading, so a recent start isn't diluted) and days since each was last trained. It reads the API key from `~/.claude/hevy/.env`; if that is missing, tell Dan to run `yadm decrypt`. To look up an exercise's exact title or id: `python3 ~/.claude/hevy/find_exercise.py bench press`.
 
 ## 3. Plan
 
@@ -30,7 +31,7 @@ Read `~/.claude/hevy/programming.md` and apply it. In short:
 
 - Strength first: main lift(s) at 3-6 reps, accessories after.
 - Anchor every weight to what he actually lifted recently. Say what that was.
-- Respect recovery (days since last trained) and the focus he asked for.
+- Respect recovery and the focus he asked for. Check the dates under Recent workouts and "days since last trained". If he trained today or yesterday, say when to run this session (usually a day or two out) and keep heavy work off muscles hit in the last ~48 hours, even if they would otherwise be the obvious choice.
 - Work around injuries; say what you swapped and why.
 - Use exercise titles that exist in Hevy. If you want something that doesn't exist, check with `find_exercise.py`, and offer the hevy-add-exercise skill instead of inventing a title.
 

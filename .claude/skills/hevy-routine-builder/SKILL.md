@@ -9,7 +9,7 @@ Turns a plan into a Hevy routine via `build_routine.py`. It only creates new rou
 
 ## Steps
 
-1. **Resolve exercises.** Every exercise needs a Hevy template title that matches exactly (or a `template_id`). Look titles up with `python3 ~/.claude/hevy/find_exercise.py <words>`. If an exercise doesn't exist, use the hevy-add-exercise skill first. The "PT Exercises" custom template is Dan's prehab block.
+1. **Resolve exercises.** Every exercise needs a Hevy template title that matches exactly (or a `template_id`). Look titles up with `python3 ~/.claude/hevy/find_exercise.py <words>`. If an exercise doesn't exist, use the hevy-add-exercise skill first. The "PT Exercises" custom template is Dan's prehab block. When several variants match (Lat Pulldown (Cable) vs (Machine)), pick the one in his recent history and name the choice in the preview so he can switch it.
 2. **Write the spec** as a JSON file (scratchpad or temp dir, not the repo). Weights are in lbs; the script converts to kg:
    ```json
    {
@@ -30,7 +30,7 @@ Turns a plan into a Hevy routine via `build_routine.py`. It only creates new rou
      ]
    }
    ```
-   Set fields: `type` (warmup, normal, failure, dropset; default normal), `lbs`, `reps`, `rep_range` [lo, hi], `duration_seconds`, `distance_meters`. Exercises sharing a `superset` number are grouped. Use `notes` for cues and injury-related swaps.
+   Set fields: `type` (warmup, normal, failure, dropset; default normal), `lbs`, `reps`, `rep_range` [lo, hi], `duration_seconds`, `distance_meters`. Exercises sharing a `superset` number are grouped. Use `notes` for cues and injury-related swaps. Fill the details Dan didn't give instead of asking up front, and flag them in the preview so he corrects them there: title is the plan's name or "<focus> - <date>"; rest is about 180s for main lifts at 3-6 reps and 90-120s for accessories.
 3. **Dry run** (default, sends nothing): `python3 ~/.claude/hevy/build_routine.py spec.json`. Unknown titles fail with close matches. Show Dan the printed routine and get his OK.
 4. **Create**: re-run with `--create`. It reads the routine back from Hevy and prints what was stored (in lbs). Check it matches the plan and report any difference.
 

@@ -17,7 +17,7 @@ Use a different `--weeks` if Dan names a window. Also read `~/.claude/hevy/goals
 
 ## 2. Interpret with care
 
-The trend labels are crude: they compare the latest session with earlier ones. Dan only recently started logging in detail and varies rep ranges, so before calling something "regressing", look at the actual sets (rep range changes, deload, machine settings, an injury week). Say when data is too thin to judge rather than inventing a story.
+The trend labels are crude: they compare the latest session with earlier ones. Dan only recently started logging in detail and varies rep ranges, so before calling something "regressing", look at the actual sets (rep range changes, deload, machine settings, an injury week). Say when data is too thin to judge rather than inventing a story. Weekly sets are averaged over the weeks since his first workout in the window (shown in the heading), so use that figure as printed.
 
 ## 3. Walk him through it
 
@@ -33,6 +33,6 @@ Keep it scannable; he has ADHD. Lead with the most important takeaway.
 
 ## 4. Clarify goals and save them
 
-Ask, one question at a time, whether anything has shifted: target lifts or numbers, new injuries or recovered ones, schedule changes, strength vs size emphasis. Then update `~/.claude/hevy/goals.md` (edit in place, add a dated line to its Changelog). The planner reads this file, so keep it accurate and short.
+Ask one open question first: has anything shifted in his goals, injuries or schedule? Let his answer decide the follow-ups (target lifts or numbers, injuries new or recovered, strength vs size emphasis), one at a time. Don't list every topic up front. Then update `~/.claude/hevy/goals.md` (edit in place, add a dated line to its Changelog). The planner reads this file, so keep it accurate and short.
 
 `goals.md` is private (the dotfiles repo is public): it is git-ignored and synced only through the encrypted yadm archive. After changing it, remind Dan to run `yadm encrypt` and commit the updated archive; do not commit goals.md itself or push without asking.

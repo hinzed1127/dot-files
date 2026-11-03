@@ -30,7 +30,9 @@ def describe(routine, title_of):
     print(f"{routine['title']}  notes={routine.get('notes')!r}")
     for i, e in enumerate(routine["exercises"], 1):
         name = e.get("title") or title_of.get(e["exercise_template_id"], e["exercise_template_id"])
-        print(f"{i}. {name}  superset={e.get('superset_id')}  rest={e.get('rest_seconds')}s  notes={e.get('notes')!r}")
+        rest = e.get("rest_seconds")
+        rest = "none" if rest is None else f"{rest}s"
+        print(f"{i}. {name}  superset={e.get('superset_id')}  rest={rest}  notes={e.get('notes')!r}")
         for s in e["sets"]:
             w = "bodyweight/blank" if s["weight_kg"] is None else f"{hevy.kg_to_lb(s['weight_kg']):g} lb"
             reps = s["reps"] if s["reps"] is not None else s.get("rep_range")

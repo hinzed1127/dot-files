@@ -88,6 +88,20 @@ class MuscleVolumeTest(unittest.TestCase):
         self.assertEqual(got["quadriceps"], 4)
 
 
+class EffectiveWeeksTest(unittest.TestCase):
+    WS = [workout("2026-10-13", ("BP", sets((135, 5)))), workout("2026-10-30", ("BP", sets((135, 5))))]
+
+    def test_window_longer_than_history_shrinks_to_time_since_first_workout(self):
+        self.assertEqual(analysis.effective_weeks(self.WS, 12, today=date(2026, 11, 3)), 3.0)
+
+    def test_at_least_one_week(self):
+        ws = [workout("2026-11-02", ("BP", sets((135, 5))))]
+        self.assertEqual(analysis.effective_weeks(ws, 8, today=date(2026, 11, 3)), 1)
+
+    def test_no_workouts_uses_the_window(self):
+        self.assertEqual(analysis.effective_weeks([], 8, today=date(2026, 11, 3)), 8)
+
+
 class StrengthLevelsTest(unittest.TestCase):
     def progress(self, **best):
         return {title: {"title": title, "sessions": [{"date": date(2026, 10, 1), "e1rm_lb": e}]}

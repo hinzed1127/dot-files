@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: finds-existing-zercher-squat
+expected_outcome: |
+  Searches the library first, finds that Zercher Squat already exists in Hevy, tells Dan, and does not create a duplicate.

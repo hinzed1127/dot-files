@@ -34,13 +34,14 @@ def main():
     templates = hevy.fetch_all("/exercise_templates", "exercise_templates", key, 100)
     muscle_of = {t["id"]: t["primary_muscle_group"] for t in templates}
     workouts = hevy.workouts_within_weeks(all_workouts, args.weeks)
+    active_weeks = analysis.effective_weeks(all_workouts, args.weeks)
 
     lb, on = latest_body_weight_lb(key)
     print("## Body weight")
     print(f"{lb} lb (logged {on})" if lb else "none logged")
 
-    print(f"\n## Recent workouts ({len(workouts)} in the last {args.weeks} weeks, "
-          f"{len(workouts) / args.weeks:.1f}/week)")
+    print(f"\n## Recent workouts ({len(workouts)} in the last {args.weeks} weeks; "
+          f"{len(workouts) / active_weeks:.1f}/week over the {active_weeks:.1f} weeks since the first of them)")
     for w in workouts[:args.recent]:
         print(f"{hevy.workout_date(w)}  {w['title'].strip()}")
         for ex in w["exercises"]:
@@ -62,8 +63,9 @@ def main():
     else:
         print("no body weight logged; cannot compute")
 
-    print("\n## Weekly sets by muscle (avg working sets/week; days since last trained)")
-    sets = analysis.weekly_sets_by_muscle(workouts, templates, args.weeks)
+    print(f"\n## Weekly sets by muscle (avg working sets/week over {active_weeks:.1f} weeks; "
+          "days since last trained)")
+    sets = analysis.weekly_sets_by_muscle(workouts, templates, active_weeks)
     since = analysis.days_since_trained(workouts, templates)
     for muscle, n in sorted(sets.items(), key=lambda p: -p[1]):
         print(f"{muscle}: {n:.1f}/wk, last trained {since[muscle]}d ago")

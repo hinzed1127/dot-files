@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: adds-missing-cossack-squat
+expected_outcome: |
+  Searches the library first, finds no Cossack Squat, then previews (dry run) a custom exercise with equipment none, quadriceps primary and glutes and adductors secondary, and asks Dan to confirm before creating. Nothing is created.

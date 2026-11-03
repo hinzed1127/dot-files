@@ -68,6 +68,16 @@ class CliTest(unittest.TestCase):
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertIn("DRY RUN", r.stdout)
         self.assertIn("155", r.stdout)
+        self.assertIn("rest=120s", r.stdout)
+
+    def test_build_routine_dry_run_without_rest_says_none(self):
+        f = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
+        json.dump({"title": "T", "exercises": [
+            {"title": "Bench Press (Barbell)", "sets": [{"lbs": 155, "reps": 5}]}]}, f)
+        f.close()
+        r = run("build_routine.py", f.name)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("rest=none", r.stdout)
 
     def test_build_routine_unknown_exercise_fails_with_close_matches(self):
         r = run("build_routine.py", self._spec("Bench Press"))

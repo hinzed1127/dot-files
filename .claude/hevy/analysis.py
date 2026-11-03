@@ -105,6 +105,19 @@ def _primary_muscles(templates):
     return {t["id"]: t["primary_muscle_group"] for t in templates}
 
 
+def effective_weeks(workouts, weeks, today=None):
+    """Weeks to average over: the window, shrunk to the time since the first workout in it.
+
+    Averaging over a full window understates volume when logging started recently.
+    """
+    today = today or date.today()
+    in_window = hevy.workouts_within_weeks(workouts, weeks, today)
+    if not in_window:
+        return weeks
+    first = min(hevy.workout_date(w) for w in in_window)
+    return max(1, (today - first).days / 7)
+
+
 def weekly_sets_by_muscle(workouts, templates, weeks, today=None):
     """Average working sets per week by primary muscle group over the last `weeks` weeks."""
     muscle_of = _primary_muscles(templates)
