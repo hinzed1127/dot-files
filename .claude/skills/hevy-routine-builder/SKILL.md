@@ -14,7 +14,6 @@ Turns a plan into a Hevy routine via `build_routine.py`. It only creates new rou
    ```json
    {
      "title": "Upper A - Nov 4",
-     "notes": "Heavy day",
      "exercises": [
        {
          "title": "Bench Press (Barbell)",
@@ -30,7 +29,7 @@ Turns a plan into a Hevy routine via `build_routine.py`. It only creates new rou
      ]
    }
    ```
-   Set fields: `type` (warmup, normal, failure, dropset; default normal), `lbs`, `reps`, `rep_range` [lo, hi], `duration_seconds`, `distance_meters`. Exercises sharing a `superset` number are grouped. Use `notes` for cues and injury-related swaps. Fill the details Dan didn't give instead of asking up front, and flag them in the preview so he corrects them there: title is the plan's name or "<focus> - <date>"; rest is about 180s for main lifts at 3-6 reps and 90-120s for accessories.
+   Set fields: `type` (warmup, normal, failure, dropset; default normal), `lbs`, `reps`, `rep_range` [lo, hi], `duration_seconds`, `distance_meters`. Exercises sharing a `superset` number are grouped. Use exercise-level `notes` for cues and injury-related swaps. Hevy does not keep routine-level notes (verified live), so don't put anything important there. Fill the details Dan didn't give instead of asking up front, and flag them in the preview so he corrects them there: title is the plan's name or "<focus> - <date>"; rest is about 180s for main lifts at 3-6 reps and 90-120s for accessories.
 3. **Dry run** (default, sends nothing): `python3 ~/.claude/hevy/build_routine.py spec.json`. Unknown titles fail with close matches. Show Dan the printed routine and get his OK.
 4. **Create**: re-run with `--create`. It reads the routine back from Hevy and prints what was stored (in lbs). Check it matches the plan and report any difference.
 

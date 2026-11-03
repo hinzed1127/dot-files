@@ -8,7 +8,7 @@ then reads it back and prints what Hevy stored.
 Spec format (exercise "title" must match a Hevy template title exactly; use
 find_exercise.py to look titles up, or give "template_id" instead):
 
-  {"title": "Upper A", "notes": "Heavy day", "folder_id": null,
+  {"title": "Upper A", "folder_id": null,   # Hevy does not store routine-level notes
    "exercises": [
      {"title": "Bench Press (Barbell)", "rest": 180, "notes": "Pause on chest", "superset": null,
       "sets": [{"type": "warmup", "lbs": 95, "reps": 8},
