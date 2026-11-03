@@ -147,6 +147,28 @@ def load_key():
     sys.exit(f"HEVY_API_KEY not found: set the env var or add it to {env}")
 
 
+def parse_body(raw):
+    """JSON when the body is JSON, else the trimmed text.
+
+    POST /exercise_templates answers with just the new id as plain text.
+    """
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        return raw.strip()
+
+
+def is_retryable(method, status):
+    """status is the HTTP status, or None for a network error.
+
+    Writes are retried only when Hevy rejected them as rate limited. Any other failure
+    may have happened after the write was applied, and retrying would duplicate it.
+    """
+    if status == 429:
+        return True
+    return method == "GET" and (status is None or status >= 500)
+
+
 def request(method, path, key, body=None, **params):
     qs = "&".join(f"{k}={v}" for k, v in params.items())
     url = f"{BASE}{path}" + (f"?{qs}" if qs else "")
@@ -156,17 +178,18 @@ def request(method, path, key, body=None, **params):
         headers["Content-Type"] = "application/json"
     for attempt in range(5):
         req = urllib.request.Request(url, data=data, method=method, headers=headers)
+        status = None
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
-                return json.load(r)
+                return parse_body(r.read().decode())
         except urllib.error.HTTPError as e:
-            detail = e.read().decode(errors="replace")[:300]
-            # 4xx means our request is wrong; retrying won't help (429 aside).
-            if 400 <= e.code < 500 and e.code != 429:
-                sys.exit(f"{method} {path} failed: HTTP {e.code} {detail}")
-            err = f"HTTP {e.code} {detail}"
+            status = e.code
+            err = f"HTTP {e.code} {e.read().decode(errors='replace')[:300]}"
         except Exception as e:
             err = str(e)
+        if not is_retryable(method, status):
+            hint = "" if method == "GET" else " (the write may have been applied; check before retrying)"
+            sys.exit(f"{method} {path} failed: {err}{hint}")
         print(f"  retry {attempt + 1} for {method} {path}: {err}", file=sys.stderr)
         time.sleep(2 ** attempt)
     sys.exit(f"giving up on {method} {path}")

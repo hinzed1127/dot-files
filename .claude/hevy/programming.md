@@ -6,8 +6,17 @@ Shared by hevy-workout-planner and hevy-progress-checkin. These are general rule
 
 - 1-2 main lifts first (squat, bench, deadlift or trap bar, overhead press, row variants): 3-5 working sets of 3-6 reps, leaving 1-3 reps in reserve (RPE 7-9). Heavy sets early, while fresh.
 - 3-5 accessories after: 6-12 reps, 2-4 sets, chosen to support the main lifts or cover muscle groups that are under-trained. Hypertrophy-range work is fine here and is a side effect, not the aim.
-- About 5-7 exercises total. Include ramp-up warmup sets for the first main lift.
-- If Dan uses a PT/prehab block (a custom "PT Exercises" template appears in his history), put it first.
+- About 5-7 exercises total.
+- Rest between sets: about 3 minutes for main lifts, 2-3 minutes for other heavy compounds (hip thrust, rows), 60-120 seconds for accessories.
+- Every session starts with the warmup below.
+
+## Warmup
+
+Dan always warms up, so plan it in every workout instead of leaving it to him.
+
+- **Prehab first**: a subset of his PT exercises (the custom "PT Exercises" template in his history), chosen to suit the day. Don't invent PT movements; list the block as "PT exercises (your usual subset)".
+- **Dynamic mobility**: 3-5 moves matched to the day's lifts, about 5 minutes. For example hip hinges and deadlifts: leg swings, hip openers, glute bridges; squats: ankle and hip mobility, bodyweight squats; presses: arm circles, band pull-aparts, scapular push-ups; rows and pulldowns: thoracic rotations, band pull-aparts. Avoid movements that load an injured area.
+- **Ramp-up sets** for compound lifts that merit them: main lifts and other heavy compounds (hip thrust, rows at working weight). Roughly 3-4 sets building to the first working set, for example the bar or a light load for 8, about 50% for 5, about 70% for 3, about 85% for 1-2, then working weight. Lighter lifts need fewer. Skip ramp-ups for light accessories and isolation work. Enter them as warmup sets with real weights.
 
 ## Choosing weights (anchor to real data, never guess)
 
@@ -21,6 +30,7 @@ Shared by hevy-workout-planner and hevy-progress-checkin. These are general rule
 - Use "days since last trained" from `summary.py`. Avoid heavy work for the same primary muscle within about 48 hours. Lower-body heavy days need more spacing than upper.
 - For "full body" requests, pick one lower-body, one horizontal push, one pull, and one vertical push or hip hinge pattern, rotating which is the main lift versus accessory from session to session.
 - Weekly sets per muscle in `summary.py` are a sanity check: a rough range for steady progress is about 6-12 hard sets per muscle group per week for strength-focused training. Flag big gaps.
+- Hevy credits each exercise to one primary muscle, so compound lifts undercount the others. Read the numbers with that in mind: trap bar deadlifts and Romanian deadlifts also work hamstrings, back and quads. Dan wants the trap bar deadlift to target glutes most of all, so Hevy tagging it "glutes" fits.
 
 ## Stagnation
 

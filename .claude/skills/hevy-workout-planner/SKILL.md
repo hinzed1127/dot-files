@@ -32,9 +32,10 @@ Read `~/.claude/hevy/programming.md` and apply it. In short:
 - Strength first: main lift(s) at 3-6 reps, accessories after.
 - Anchor every weight to what he actually lifted recently. Say what that was.
 - Respect recovery and the focus he asked for. Check the dates under Recent workouts and "days since last trained". If he trained today or yesterday, say when to run this session (usually a day or two out) and keep heavy work off muscles hit in the last ~48 hours, even if they would otherwise be the obvious choice.
+- Include the warmup from the Warmup section of programming.md: a subset of his PT exercises, 3-5 dynamic moves matched to today's lifts, and ramp-up sets (as `warmup` sets with real weights) for each compound lift that merits them.
 - Work around injuries; say what you swapped and why.
 - Use exercise titles that exist in Hevy. If you want something that doesn't exist, check with `find_exercise.py`, and offer the hevy-add-exercise skill instead of inventing a title.
 
 ## 4. Present
 
-Show the plan as a table per workout: exercise, sets x reps, weight (lb), rest, one-line reason. Keep reasoning short, and call out judgment calls (progression jumps, injury swaps, anything you extrapolated). End by offering to save it to Hevy with the hevy-routine-builder skill. Don't create anything in Hevy without his yes.
+Show a short warmup block first (PT subset, dynamic moves), then the plan as a table per workout: exercise, sets x reps (with ramp-up sets listed), weight (lb), rest, one-line reason. Keep reasoning short, and call out judgment calls (progression jumps, injury swaps, anything you extrapolated). End by offering to save it to Hevy with the hevy-routine-builder skill. Don't create anything in Hevy without his yes.

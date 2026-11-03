@@ -162,6 +162,35 @@ class RoutineBodyTest(unittest.TestCase):
         self.assertEqual(ex["exercise_template_id"], "A3")
 
 
+class ParseBodyTest(unittest.TestCase):
+    def test_json_object_is_parsed(self):
+        self.assertEqual(hevy.parse_body('{"id": "A1"}'), {"id": "A1"})
+
+    def test_bare_uuid_is_returned_as_text(self):
+        # POST /exercise_templates answers with just the new id, not JSON. Some uuids
+        # start like a JSON number ("9834033e-1b21-...") so they must not be mistaken for one.
+        for body in ("9834033e-1b21-43c5-aa1d-9811de6b958a\n", "02c166fc-9784-4a34-ab48-114ff0f9877c",
+                     "ff19e182-8660-4fe3-9cf7-9fe3bda9e6ee"):
+            self.assertEqual(hevy.parse_body(body), body.strip())
+
+
+class RetryPolicyTest(unittest.TestCase):
+    def test_reads_retry_on_server_and_network_errors(self):
+        self.assertTrue(hevy.is_retryable("GET", None))
+        self.assertTrue(hevy.is_retryable("GET", 503))
+
+    def test_reads_do_not_retry_client_errors_except_rate_limit(self):
+        self.assertFalse(hevy.is_retryable("GET", 404))
+        self.assertTrue(hevy.is_retryable("GET", 429))
+
+    def test_writes_retry_only_when_rate_limited(self):
+        # Anything else may mean the write already happened; retrying would duplicate it.
+        self.assertTrue(hevy.is_retryable("POST", 429))
+        self.assertFalse(hevy.is_retryable("POST", None))
+        self.assertFalse(hevy.is_retryable("POST", 500))
+        self.assertFalse(hevy.is_retryable("PUT", 502))
+
+
 class LiveApiTest(unittest.TestCase):
     def setUp(self):
         try:

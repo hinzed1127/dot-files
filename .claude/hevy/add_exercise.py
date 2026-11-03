@@ -50,7 +50,7 @@ def main():
         print("DRY RUN, would send:")
         print(json.dumps(body, indent=1))
         return
-    print(json.dumps(hevy.post("/exercise_templates", key, body), indent=1))
+    print(f"created exercise id: {hevy.post('/exercise_templates', key, body)}")
 
 
 if __name__ == "__main__":
