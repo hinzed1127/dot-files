@@ -34,7 +34,7 @@ def describe(routine, title_of):
         rest = "none" if rest is None else f"{rest}s"
         print(f"{i}. {name}  superset={e.get('superset_id')}  rest={rest}  notes={e.get('notes')!r}")
         for s in e["sets"]:
-            w = "bodyweight/blank" if s["weight_kg"] is None else f"{hevy.kg_to_lb(s['weight_kg']):g} lb"
+            w = "bodyweight/blank" if s["weight_kg"] is None else f"{hevy.kg_to_lb(s['weight_kg']):g} lb ({s['weight_kg']:.2f} kg)"
             reps = s["reps"] if s["reps"] is not None else s.get("rep_range")
             print(f"     {s['type']:7} {w} x {reps}")
 

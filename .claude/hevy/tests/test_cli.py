@@ -69,6 +69,7 @@ class CliTest(unittest.TestCase):
         self.assertIn("DRY RUN", r.stdout)
         self.assertIn("155", r.stdout)
         self.assertIn("rest=120s", r.stdout)
+        self.assertIn("155 lb (70.31 kg)", r.stdout)
 
     def test_build_routine_dry_run_without_rest_says_none(self):
         f = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
