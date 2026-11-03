@@ -88,6 +88,35 @@ class MuscleVolumeTest(unittest.TestCase):
         self.assertEqual(got["quadriceps"], 4)
 
 
+class StrengthLevelsTest(unittest.TestCase):
+    def progress(self, **best):
+        return {title: {"title": title, "sessions": [{"date": date(2026, 10, 1), "e1rm_lb": e}]}
+                for title, e in best.items()}
+
+    def test_ratio_and_level_for_main_lifts_found_in_history(self):
+        prog = self.progress(**{"Bench Press (Barbell)": 178, "Squat (Barbell)": 356})
+        got = {r["lift"]: r for r in analysis.strength_levels(prog, bodyweight_lb=178)}
+        self.assertEqual(got["bench press"]["ratio"], 1.0)
+        self.assertEqual(got["bench press"]["level"], "intermediate")
+        self.assertEqual(got["squat"]["ratio"], 2.0)
+        self.assertEqual(got["squat"]["level"], "advanced")
+
+    def test_uses_best_e1rm_across_sessions_and_variant_titles(self):
+        prog = {"a": {"title": "Deadlift (Trap bar)", "sessions": [
+                    {"date": date(2026, 9, 1), "e1rm_lb": 200}, {"date": date(2026, 10, 1), "e1rm_lb": 267}]},
+                "b": {"title": "Deadlift (Barbell)", "sessions": [{"date": date(2026, 10, 1), "e1rm_lb": 100}]}}
+        got = analysis.strength_levels(prog, bodyweight_lb=178)
+        self.assertEqual([r["lift"] for r in got], ["deadlift"])
+        self.assertEqual(got[0]["e1rm_lb"], 267)
+
+    def test_below_first_threshold_is_untrained(self):
+        prog = self.progress(**{"Overhead Press (Barbell)": 40})
+        self.assertEqual(analysis.strength_levels(prog, bodyweight_lb=178)[0]["level"], "untrained")
+
+    def test_lifts_with_no_history_are_omitted(self):
+        self.assertEqual(analysis.strength_levels({}, bodyweight_lb=178), [])
+
+
 class FormatSetsTest(unittest.TestCase):
     def test_collapses_repeated_sets_and_marks_warmups(self):
         s = sets((115, 10), kind="warmup") + sets((145, 8), (145, 8), (145, 8), (150, 6))

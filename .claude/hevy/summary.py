@@ -55,6 +55,13 @@ def main():
         print(f"{entry['title']}: {len(s)} sessions, last {s[-1]['date']} {s[-1]['lb']:g}x{s[-1]['reps']}, "
               f"best e1RM {best:.0f}, trend: {analysis.classify_trend(s)}")
 
+    print("\n## Strength vs bodyweight (best e1RM in all history; approximate standards in analysis.py)")
+    if lb:
+        for r in analysis.strength_levels(analysis.exercise_sessions(all_workouts), lb):
+            print(f"{r['lift']}: e1RM {r['e1rm_lb']:.0f} = {r['ratio']}x bodyweight ({r['level']})")
+    else:
+        print("no body weight logged; cannot compute")
+
     print("\n## Weekly sets by muscle (avg working sets/week; days since last trained)")
     sets = analysis.weekly_sets_by_muscle(workouts, templates, args.weeks)
     since = analysis.days_since_trained(workouts, templates)

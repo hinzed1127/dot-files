@@ -29,7 +29,8 @@ class CliTest(unittest.TestCase):
     def test_summary_has_all_sections(self):
         r = run("summary.py", "--weeks", "8")
         self.assertEqual(r.returncode, 0, r.stderr)
-        for heading in ("Body weight", "Recent workouts", "Exercise progress", "Weekly sets by muscle"):
+        for heading in ("Body weight", "Recent workouts", "Exercise progress",
+                        "Strength vs bodyweight", "Weekly sets by muscle"):
             self.assertIn(heading, r.stdout)
 
     def test_find_exercise_prints_id_and_title(self):

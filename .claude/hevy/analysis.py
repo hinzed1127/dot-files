@@ -38,6 +38,36 @@ def exercise_sessions(workouts):
     return out
 
 
+# Approximate male bodyweight multiples at which each level is reached, in the style of
+# commonly cited strength-standard tables. Rough guides, not science: edit freely.
+LEVELS = ["novice", "intermediate", "advanced", "elite"]
+STRENGTH_STANDARDS = {
+    "squat": {"titles": ["Squat (Barbell)"], "thresholds": [0.75, 1.25, 1.75, 2.25]},
+    "bench press": {"titles": ["Bench Press (Barbell)"], "thresholds": [0.5, 1.0, 1.5, 2.0]},
+    "deadlift": {"titles": ["Deadlift (Barbell)", "Deadlift (Trap bar)"], "thresholds": [1.0, 1.5, 2.0, 2.5]},
+    "overhead press": {"titles": ["Overhead Press (Barbell)"], "thresholds": [0.35, 0.65, 0.9, 1.2]},
+    "barbell row": {"titles": ["Bent Over Row (Barbell)"], "thresholds": [0.5, 0.9, 1.2, 1.5]},
+}
+
+
+def strength_levels(progress, bodyweight_lb):
+    """Best e1RM per main lift as a multiple of bodyweight, with an approximate level.
+
+    `progress` is the output of exercise_sessions. Lifts never performed are omitted.
+    """
+    out = []
+    for lift, std in STRENGTH_STANDARDS.items():
+        best = [s["e1rm_lb"] for e in progress.values() if e["title"] in std["titles"] for s in e["sessions"]]
+        if not best:
+            continue
+        e1rm = max(best)
+        ratio = round(e1rm / bodyweight_lb, 2)
+        reached = [lvl for lvl, t in zip(LEVELS, std["thresholds"]) if ratio >= t]
+        out.append({"lift": lift, "e1rm_lb": e1rm, "ratio": ratio,
+                    "level": reached[-1] if reached else "untrained"})
+    return out
+
+
 def classify_trend(sessions):
     """Latest session's e1RM against the best of all earlier sessions."""
     if len(sessions) < MIN_SESSIONS_FOR_TREND:
