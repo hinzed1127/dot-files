@@ -12,9 +12,9 @@ Used by the hevy-* skills in ~/.claude/skills/. Tracked with yadm.
 
 - `hevy.py`: API client, kg/lb conversion, request-body builders
 - `analysis.py`: e1RM, trends, weekly volume by muscle
-- `summary.py`, `find_exercise.py`, `add_exercise.py`, `build_routine.py`: CLIs the skills call
+- `summary.py`, `find_exercise.py`, `add_exercise.py`, `build_routine.py`, `list_routines.py`: CLIs the skills call
 - `goals.md`: goals and current injuries read by the planner and check-in skills
 
 After changing `.env` or `goals.md`, run `yadm encrypt` and commit the updated archive.
 
-Hevy's API has no delete endpoints, so scripts that create data default to a dry run.
+Hevy's API has no delete endpoints, so scripts that create data default to a dry run. Routines can be replaced in place with `build_routine.py --update ROUTINE_ID`.

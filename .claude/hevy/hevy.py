@@ -133,6 +133,23 @@ def build_routine_body(spec, templates):
             for e in spec["exercises"]]}}
 
 
+def build_routine_update_body(spec, templates, current):
+    """Turn a lbs-based spec into a PUT /routines/{id} body that replaces routine `current`.
+
+    PUT rejects "rep_range": null (POST accepts it), so unset rep ranges are left out.
+    The routine stays in its current folder unless the spec names one.
+    """
+    body = build_routine_body(spec, templates)
+    routine = body["routine"]
+    if "folder_id" not in spec:
+        routine["folder_id"] = current.get("folder_id")
+    for e in routine["exercises"]:
+        for s in e["sets"]:
+            if s["rep_range"] is None:
+                del s["rep_range"]
+    return body
+
+
 # --- HTTP -------------------------------------------------------------------
 
 def load_key():
@@ -201,6 +218,10 @@ def get(path, key, **params):
 
 def post(path, key, body):
     return request("POST", path, key, body=body)
+
+
+def put(path, key, body):
+    return request("PUT", path, key, body=body)
 
 
 def fetch_all(path, list_key, key, page_size, max_pages=None):

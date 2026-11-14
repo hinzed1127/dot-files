@@ -80,6 +80,36 @@ class CliTest(unittest.TestCase):
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertIn("rest=none", r.stdout)
 
+    def test_build_routine_dry_run_shows_duration_sets(self):
+        f = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
+        json.dump({"title": "T", "exercises": [
+            {"title": "PT Exercises", "sets": [{"duration_seconds": 900}]}]}, f)
+        f.close()
+        r = run("build_routine.py", f.name)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("900s", r.stdout)
+
+    def test_build_routine_create_and_update_are_exclusive(self):
+        r = run("build_routine.py", self._spec("Bench Press (Barbell)"), "--create", "--update", "abc")
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("not allowed with", r.stderr)
+
+    def test_build_routine_update_of_missing_routine_fails_before_writing(self):
+        r = run("build_routine.py", self._spec("Bench Press (Barbell)"),
+                "--update", "00000000-0000-0000-0000-000000000000")
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("GET /routines/00000000-0000-0000-0000-000000000000 failed", r.stderr)
+
+    def test_list_routines_prints_id_and_title(self):
+        r = run("list_routines.py")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertRegex(r.stdout, r"[0-9a-f-]{36}\s+\S")
+
+    def test_list_routines_filters_by_title_words(self):
+        r = run("list_routines.py", "zzz", "no", "such", "routine")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("no routines match", r.stdout)
+
     def test_build_routine_unknown_exercise_fails_with_close_matches(self):
         r = run("build_routine.py", self._spec("Bench Press"))
         self.assertNotEqual(r.returncode, 0)

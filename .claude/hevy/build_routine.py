@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Create a Hevy routine from a JSON spec written in lbs (POST only; never edits existing routines).
+"""Create a Hevy routine from a JSON spec written in lbs, or replace an existing one.
 
 Use this to save a planned workout into Hevy so it shows up ready to run in the
-app. Default is a dry run that prints the routine in lbs; --create sends it,
-then reads it back and prints what Hevy stored.
+app. Default is a dry run that prints the routine in lbs. --create sends it as a
+new routine; --update ROUTINE_ID replaces that routine's title and exercises with
+the spec (it keeps its folder unless the spec sets folder_id). Both read the
+routine back and print what Hevy stored.
 
 Spec format (exercise "title" must match a Hevy template title exactly; use
 find_exercise.py to look titles up, or give "template_id" instead):
@@ -36,13 +38,16 @@ def describe(routine, title_of):
         for s in e["sets"]:
             w = "bodyweight/blank" if s["weight_kg"] is None else f"{hevy.kg_to_lb(s['weight_kg']):g} lb ({s['weight_kg']:.2f} kg)"
             reps = s["reps"] if s["reps"] is not None else s.get("rep_range")
-            print(f"     {s['type']:7} {w} x {reps}")
+            duration = f"  {s['duration_seconds']}s" if s.get("duration_seconds") is not None else ""
+            print(f"     {s['type']:7} {w} x {reps}{duration}")
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("spec", help="path to routine spec JSON")
-    ap.add_argument("--create", action="store_true", help="send to Hevy (default is a dry run)")
+    send = ap.add_mutually_exclusive_group()
+    send.add_argument("--create", action="store_true", help="send to Hevy as a new routine (default is a dry run)")
+    send.add_argument("--update", metavar="ROUTINE_ID", help="replace this existing routine with the spec")
     args = ap.parse_args()
 
     spec = json.load(open(args.spec))
@@ -54,6 +59,13 @@ def main():
         sys.exit(f"error: {e}")
     title_of = {t["id"]: t["title"] for t in templates}
 
+    if args.update:
+        current = hevy.get(f"/routines/{args.update}", key)["routine"]
+        print(f"updating '{current['title']}' ({args.update})")
+        hevy.put(f"/routines/{args.update}", key, hevy.build_routine_update_body(spec, templates, current))
+        print("updated; Hevy stored:")
+        describe(hevy.get(f"/routines/{args.update}", key)["routine"], title_of)
+        return
     if not args.create:
         print("DRY RUN, would create:")
         describe(body["routine"], title_of)

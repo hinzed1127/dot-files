@@ -162,6 +162,26 @@ class RoutineBodyTest(unittest.TestCase):
         self.assertEqual(ex["exercise_template_id"], "A3")
 
 
+class RoutineUpdateBodyTest(unittest.TestCase):
+    SPEC = {"title": "T", "exercises": [
+        {"title": "Bench Press (Barbell)", "sets": [{"lbs": 155, "reps": 5},
+                                                    {"lbs": 100, "rep_range": [8, 12]}]}]}
+
+    def test_omits_unset_rep_range_because_put_rejects_null(self):
+        sets = hevy.build_routine_update_body(self.SPEC, TEMPLATES, {"folder_id": None})["routine"]["exercises"][0]["sets"]
+        self.assertNotIn("rep_range", sets[0])
+        self.assertEqual(sets[1]["rep_range"], {"start": 8, "end": 12})
+
+    def test_keeps_current_folder_when_spec_names_none(self):
+        body = hevy.build_routine_update_body(self.SPEC, TEMPLATES, {"folder_id": 42})["routine"]
+        self.assertEqual(body["folder_id"], 42)
+
+    def test_spec_folder_overrides_current_folder(self):
+        spec = dict(self.SPEC, folder_id=7)
+        body = hevy.build_routine_update_body(spec, TEMPLATES, {"folder_id": 42})["routine"]
+        self.assertEqual(body["folder_id"], 7)
+
+
 class ParseBodyTest(unittest.TestCase):
     def test_json_object_is_parsed(self):
         self.assertEqual(hevy.parse_body('{"id": "A1"}'), {"id": "A1"})
